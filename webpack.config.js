@@ -30,5 +30,12 @@ export default {
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
     ]
+  },
+  externals: {
+    // Include createjs script on your page, then add the below.
+    // The left hand side represents the global module that gets exposed to your ES6 code
+    // The right hand side represents the object that is exposed/imported from your externally referenced script.
+
+    "createjs": "createjs"
   }
 };
