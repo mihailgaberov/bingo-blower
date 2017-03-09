@@ -6,7 +6,7 @@ export default {
   entry: [
     'eventsource-polyfill', // necessary for hot reloading with IE
     'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails.
-    path.resolve(__dirname, 'src/index')
+    path.resolve(__dirname, 'index')
   ],
   target: 'web',
   output: {
@@ -22,20 +22,32 @@ export default {
     new webpack.NoEmitOnErrorsPlugin()
   ],
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        include: path.join(__dirname, 'src'),
+        loader: 'babel-loader'
+      },
+      {
+        test: /(\.css)$/,
+        loader: ['style', 'css']
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'file-loader'
+      }
+    ]
+    /*loaders: [
       {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel-loader']},
       {test: /(\.css)$/, loaders: ['style', 'css']},
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
       {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
-    ]
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
+      {test: /\.(jpg|png|svg)$/, loader: 'file-loader', options: {name: '[path][name].[hash].[ext]'}}
+    ]*/
   },
   externals: {
-    // Include createjs script on your page, then add the below.
-    // The left hand side represents the global module that gets exposed to your ES6 code
-    // The right hand side represents the object that is exposed/imported from your externally referenced script.
-
     "createjs": "createjs"
   }
 };
