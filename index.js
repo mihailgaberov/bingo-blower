@@ -20,7 +20,8 @@ export default class App {
 
     let i = 0
     while(i < this.BALLS_COUNT) {
-      stage.addChild(new Ball(stage.canvas.width, stage.canvas.height))
+      const ball = new Ball(stage.canvas.width, stage.canvas.height)
+      stage.addChild(ball.bitmap)
       i++;
     }
 
