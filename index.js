@@ -2,6 +2,7 @@
  * Created by Mihail on 3/5/2017.
  */
 import createjs from 'createjs'
+import Ball from './src/Ball'
 
 export default class App {
   constructor() {
@@ -19,14 +20,7 @@ export default class App {
 
     let i = 0
     while(i < this.BALLS_COUNT) {
-      let bitmap = new createjs.Bitmap('static/images/ball7b.png')
-
-      bitmap.x = Math.floor(Math.random() * stage.canvas.width)
-      bitmap.y = Math.floor(Math.random() * stage.canvas.height)
-
-      console.log('coords:', bitmap.x, bitmap.y)
-      bitmap.shadow = new createjs.Shadow("#000000", 5, 5, 10)
-      stage.addChild(bitmap);
+      stage.addChild(new Ball(stage.canvas.width, stage.canvas.height))
       i++;
     }
 
