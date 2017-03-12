@@ -1,52 +1,66 @@
 {
-  "name": "bingo-blower",
+  "name": "@bingo-bigul/blower",
   "version": "1.0.0",
   "description": "POC for a Bingo blower component with nice animations created with CreateJS.",
   "main": "index.js",
   "scripts": {
-    "prestart": "babel-node tools/start-message.js",
-    "start": "npm-run-all --parallel test:watch open:src",
-    "open:src": "babel-node tools/src-server.js",
-    "test": "mocha --reporter spec tools/test-setup.js \"src/**/*.test.js\"",
+    "start:dev": "webpack-dev-server",
+    "start:dev0": "webpack-dev-server --host 0.0.0.0",
+    "test": "ava test",
+    "lint": "standard",
     "test:watch": "npm run test -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mihailgaberov/bingo-blower.git"
-  },
-  "keywords": [
-    "bingo",
-    "game",
-    "blower",
-    "animation",
-    "es6",
-    "javascript"
-  ],
+  "keywords": [ "bingo",
+        "game",
+        "blower",
+        "animation",
+        "es6",
+        "javascript"],
   "author": "Mihail Gaberov",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mihailgaberov/bingo-blower/issues"
-  },
-  "homepage": "https://github.com/mihailgaberov/bingo-blower#readme",
+  "license": "UNLICENSED",
   "devDependencies": {
-    "babel-cli": "^6.23.0",
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-es2015": "6.6.0",
-    "babel-register": "^6.23.0",
-    "colors": "^1.1.2",
-    "css-loader": "^0.26.2",
-    "eventsource-polyfill": "0.9.6",
-    "express": "^4.15.0",
-    "file-loader": "^0.10.1",
-    "jsdom": "^9.11.0",
-    "mocha": "^3.2.0",
-    "npm-run-all": "^4.0.2",
-    "open": "0.0.5",
-    "path": "^0.12.7",
-    "url-loader": "^0.5.8",
-    "webpack": "^2.1.0-beta",
-    "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.10.0"
+    "ava": "^0.18.1",
+    "ignore-styles": "^5.0.1",
+    "standard": "^8.6.0",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "ava": {
+    "concurrency": 5,
+    "require": [
+      "babel-register",
+      "babel-polyfill",
+      "ignore-styles"
+    ],
+    "babel": "inherit"
+  },
+  "standard": {
+    "ignore": [
+      "static/"
+    ]
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ],
+    "presets": [
+      "es2015"
+    ]
+  },
+  "dependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.10.0",
+    "immutable": "^3.8.1",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webfontloader": "^1.6.24",
+    "webpack": "^2.2.1"
   }
 }
