@@ -5,7 +5,7 @@ import createjs from 'createjs'
 
 export default class App {
   constructor() {
-    console.log('>>> App intialized...')
+    console.log('>>> App initialized...')
     this.init()
   }
 
