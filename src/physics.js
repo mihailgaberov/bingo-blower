@@ -32,12 +32,12 @@ const A = Math.PI * ball.radius * ball.radius / (10000) // m^2
 const ag = 9.81  // m / s^2
 const mouse = { x: 0, y: 0, isDown: false }
 
-function getMousePosition(e) {
+const getMousePosition = (e) => {
   mouse.x = e.pageX - canvas.offsetLeft;
   mouse.y = e.pageY - canvas.offsetTop;
 }
 
-const mouseDown = function (e) {
+const mouseDown = (e) => {
   if (e.which === 1) {
     getMousePosition(e)
     mouse.isDown = true
@@ -45,7 +45,8 @@ const mouseDown = function (e) {
     ball.position.y = mouse.y
   }
 }
-const mouseUp = function (e) {
+
+const mouseUp = (e) => {
   if (e.which === 1) {
     mouse.isDown = false
     ball.velocity.y = (ball.position.y - mouse.y) / 10
@@ -53,7 +54,7 @@ const mouseUp = function (e) {
   }
 }
 
-const setup = function () {
+const setup = () => {
   canvas = document.getElementById('canvas')
   ctx = canvas.getContext('2d')
 
@@ -65,7 +66,8 @@ const setup = function () {
   ctx.strokeStyle = '#000000'
   loopTimer = setInterval(loop, frameDelay)
 }
-var loop = function() {
+
+const loop = () => {
   if (!mouse.isDown) {
     // Do physics
     // Drag force: Fd = -1/2 * Cd * A * rho * v * v
@@ -99,11 +101,10 @@ var loop = function() {
     ball.velocity.x *= ball.restitution;
     ball.position.x = ball.radius;
   }
+
+
   // Draw the ball
-
-
   ctx.clearRect(0,0,width,height);
-
   ctx.save();
 
   ctx.translate(ball.position.x, ball.position.y);
@@ -125,6 +126,6 @@ var loop = function() {
     ctx.stroke();
     ctx.closePath();
   }
-
 }
+
 setup();
