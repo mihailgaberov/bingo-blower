@@ -66,7 +66,7 @@ const setup = function () {
   loopTimer = setInterval(loop, frameDelay)
 }
 var loop = function() {
-  if ( ! mouse.isDown) {
+  if (!mouse.isDown) {
     // Do physics
     // Drag force: Fd = -1/2 * Cd * A * rho * v * v
     let Fx = -0.5 * Cd * A * rho * ball.velocity.x * ball.velocity.x * ball.velocity.x / Math.abs(ball.velocity.x)
@@ -109,12 +109,13 @@ var loop = function() {
   ctx.translate(ball.position.x, ball.position.y);
   ctx.beginPath();
   ctx.arc(0, 0, ball.radius, 0, Math.PI*2, true);
-  ctx.fill();
   ctx.closePath();
-
+  ctx.fill();
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.font = "bold " + ball.radius + "px serif";
+  ctx.fillText('7', 0, 5);
   ctx.restore();
-
-
 
   // Draw the slingshot
   if (mouse.isDown) {
