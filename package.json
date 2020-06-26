@@ -10,12 +10,14 @@
     "lint": "standard",
     "test:watch": "npm run test -- --watch"
   },
-  "keywords": [ "bingo",
-        "game",
-        "blower",
-        "animation",
-        "es6",
-        "javascript"],
+  "keywords": [
+    "bingo",
+    "game",
+    "blower",
+    "animation",
+    "es6",
+    "javascript"
+  ],
   "author": "Mihail Gaberov",
   "license": "UNLICENSED",
   "devDependencies": {
