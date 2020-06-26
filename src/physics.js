@@ -52,6 +52,7 @@ const loop = () => {
   // Calculate acceleration ( F = ma )
   const ax = Fx / ball.mass
   const ay = ag + (Fy / ball.mass)
+
   // Integrate to get velocity
   ball.velocity.x += ax * frameRate
   ball.velocity.y += ay * frameRate
@@ -65,10 +66,17 @@ const loop = () => {
     ball.velocity.y *= ball.restitution
     ball.position.y = height - ball.radius
   }
+
+  if (ball.position.y < ball.radius) {
+    ball.velocity.y *= ball.restitution
+    ball.position.y = ball.radius
+  }
+
   if (ball.position.x > width - ball.radius) {
     ball.velocity.x *= ball.restitution
     ball.position.x = width - ball.radius
   }
+
   if (ball.position.x < ball.radius) {
     ball.velocity.x *= ball.restitution
     ball.position.x = ball.radius
