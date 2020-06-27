@@ -1,14 +1,14 @@
 // import createjs from 'createjs'
 // import Ball from './src/Ball'
-import Matter from 'matter-js';
+import Matter from 'matter-js'
 
 export default class App {
-  constructor() {
+  constructor () {
     console.log('>>> App initialized...')
 
     this.BALLS_COUNT = 75
 
-    this.initMatter();
+    this.initMatter()
 
     // this.init()
   }
@@ -29,7 +29,7 @@ export default class App {
     createjs.Ticker.addEventListener('tick', stage)
   }*/
 
-  initMatter() {
+  initMatter () {
     const Engine = Matter.Engine,
       Render = Matter.Render,
       World = Matter.World,
@@ -38,7 +38,8 @@ export default class App {
     const engine = Engine.create()
 
     const render = Render.create({
-      element: document.body,
+      // element: document.body,
+      canvas: canvas,
       engine: engine,
       options: {
         width: 800,
@@ -47,15 +48,28 @@ export default class App {
       }
     })
 
-    const boxA = Bodies.rectangle(400, 200, 80, 80)
-    const ballA = Bodies.circle(380, 100, 40, 10)
+    const boxA = Bodies.rectangle(400, 200, 80, 80, { restitution: 1 })
+    const ballA = Bodies.circle(380, 100, 40, { restitution: 1 })
     const ballB = Bodies.circle(460, 10, 40, 10)
+    const ballC = Bodies.circle(460, 10, 20,  {
+      restitution: 1,
+      render: {
+        sprite: {
+          texture: "static/images/ball7b.png"
+        }
+      }
+    })
     const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true })
 
-    World.add(engine.world, [boxA, ballA, ballB, ground]);
+    console.log('>>> ballA: ', ballA.position.y)
+    if (ballA.position.y > 300 - ballA.circleRadius) {
+      console.log('>>> kaboom')
+    }
 
-    Engine.run(engine);
-    Render.run(render);
+    World.add(engine.world, [boxA, ballA, ballB, ballC, ground])
+
+    Engine.run(engine)
+    Render.run(render)
   }
 }
 
