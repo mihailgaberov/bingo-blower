@@ -46,7 +46,10 @@ export default class App {
       engine: engine,
       options: {
         wireframes: false,
-        background: 'static/images/blower.png'
+        width: 500,
+        height: 500,
+        background: 'transparent'
+        // background: 'static/images/blower.png'
       }
     })
     const ballC = Bodies.circle(render.canvas.width / 2, 10, 20, {
@@ -58,7 +61,9 @@ export default class App {
       }
     })
     const onRenderTick = () => {
-      if (ballC.position.y > render.canvas.height - ballC.circleRadius) {
+      console.log('y:', ballC.position.y);
+      console.log('h:', render.canvas.height);
+      if (ballC.position.y >= render.canvas.height - 60) {
         Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: .005, y: -0.05 })
       }
 
@@ -69,7 +74,7 @@ export default class App {
       if (ballC.position.x < ballC.circleRadius) {
         Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: 0.05, y: -0.005 })
       }
-      if (ballC.position.x > render.canvas.width - ballC.circleRadius) {
+      if (ballC.position.x > render.canvas.width - 60) {
         Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: -0.05, y: 0.005 })
       }
     }
@@ -78,6 +83,45 @@ export default class App {
 
     Engine.run(engine)
     Render.run(render)
+
+    /**
+     * Build the circle bounds - BEGIN
+     * */
+    const addBody = (...bodies) => {
+      World.add(engine.world, ...bodies)
+    }
+
+    const addRect = ({ x = 0, y = 0, w = 10, h = 10, options = {} } = {}) => {
+      const body = Bodies.rectangle(x, y, w, h, options)
+      addBody(body)
+      return body
+    }
+
+    const sW = 500;
+    const sH = 500;
+    const m = Math.min(sW, sH);
+    const rat = 1 / 4.5 * 2;
+    const r = m * rat;
+    const pegCount = 64;
+    const TAU = Math.PI * 2;
+    for (let i = 0; i < pegCount; i++) {
+      const segment = TAU / pegCount;
+      const angle2 = i / pegCount * TAU + segment / 2;
+      const x2 = Math.cos(angle2);
+      const y2 = Math.sin(angle2);
+      const cx2 = x2 * r + sW / 2;
+      const cy2 = y2 * r + sH / 2;
+      addRect({
+        x: cx2, y: cy2, w: 10 / 1000 * m, h: 300 / 1000 * m, options: {
+          angle: angle2, isStatic: true, density: 1, render: {
+            fillStyle: 'transparent',
+            strokeStyle: 'white',
+            lineWidth: 0
+          }
+        }
+      });
+    }
+    // Build the circle bounds - END
   }
 }
 
