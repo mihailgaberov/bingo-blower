@@ -8,12 +8,15 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
+  background: url(static/images/blower.png);
+  background-repeat: no-repeat;
+  background-size: 138%;
+  background-position: -222px -112px;
   transform: translateY(-50%) translateX(-50%);
 
   &:after {
     content: '';
     border-radius: 100%;
-    border: 5px solid black;
     position: absolute;
     top: 50%;
     left: 50%;
