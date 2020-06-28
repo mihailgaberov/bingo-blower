@@ -1,5 +1,3 @@
-// import createjs from 'createjs'
-// import Ball from './src/Ball'
 import Matter from 'matter-js'
 
 const BALLS_COUNT = 44
