@@ -10,7 +10,7 @@ export default class Ball {
     this.xSpeed = 5;
     this.ySpeed = 5;
 
-    this.bitmap = new createjs.Bitmap('static/images/ball7b.png')
+    this.bitmap = new createjs.Bitmap('static/images/7.png')
     this.bitmap.x = Math.floor(Math.random() * stageWidth)
     this.bitmap.y = Math.floor(Math.random() * stageHeight)
     this.bitmap.shadow = new createjs.Shadow('#00000', 5, 5, 10)

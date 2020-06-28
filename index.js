@@ -2,7 +2,7 @@
 // import Ball from './src/Ball'
 import Matter from 'matter-js'
 
-const BALLS_COUNT = 45
+const BALLS_COUNT = 44
 
 export default class App {
   static init () {
@@ -29,16 +29,20 @@ export default class App {
     })
 
     const balls = []
+    const ballImagePaths = [
+      'static/images/7.png',
+      'static/images/7.png',
+    ]
 
     const createBall = () => {
       const ball = Bodies.circle(
-        render.canvas.width / 2,
+        300,
         render.canvas.height / 2,
         20, {
           restitution: 1,
           render: {
             sprite: {
-              texture: 'static/images/ball7b.png'
+              texture: ballImagePaths[Math.round(Math.random() * 2)]
             }
           }
         })
