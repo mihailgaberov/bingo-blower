@@ -33,40 +33,48 @@ export default class App {
     const Engine = Matter.Engine,
       Render = Matter.Render,
       World = Matter.World,
-      Bodies = Matter.Bodies
+      Bodies = Matter.Bodies,
+      Body = Matter.Body,
+      Runner = Matter.Runner,
+      Events = Matter.Events
 
     const engine = Engine.create()
+    const runner = Runner.run(engine)
 
     const render = Render.create({
-      // element: document.body,
       canvas: canvas,
       engine: engine,
       options: {
-        width: 800,
-        height: 400,
-        wireframes: false
+        wireframes: false,
+        background: 'static/images/blower.png'
       }
     })
-
-    const boxA = Bodies.rectangle(400, 200, 80, 80, { restitution: 1 })
-    const ballA = Bodies.circle(380, 100, 40, { restitution: 1 })
-    const ballB = Bodies.circle(460, 10, 40, 10)
-    const ballC = Bodies.circle(460, 10, 20,  {
+    const ballC = Bodies.circle(render.canvas.width / 2, 10, 20, {
       restitution: 1,
       render: {
         sprite: {
-          texture: "static/images/ball7b.png"
+          texture: 'static/images/ball7b.png'
         }
       }
     })
-    const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true })
+    const onRenderTick = () => {
+      if (ballC.position.y > render.canvas.height - ballC.circleRadius) {
+        Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: .005, y: -0.05 })
+      }
 
-    console.log('>>> ballA: ', ballA.position.y)
-    if (ballA.position.y > 300 - ballA.circleRadius) {
-      console.log('>>> kaboom')
+      if (ballC.position.y < ballC.circleRadius) {
+        Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: -0.005, y: 0.05 })
+      }
+
+      if (ballC.position.x < ballC.circleRadius) {
+        Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: 0.05, y: -0.005 })
+      }
+      if (ballC.position.x > render.canvas.width - ballC.circleRadius) {
+        Body.applyForce(ballC, { x: ballC.position.x, y: ballC.position.y }, { x: -0.05, y: 0.005 })
+      }
     }
-
-    World.add(engine.world, [boxA, ballA, ballB, ballC, ground])
+    Events.on(runner, 'tick', onRenderTick)
+    World.add(engine.world, [ballC])
 
     Engine.run(engine)
     Render.run(render)

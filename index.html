@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <title>Bingo Blower</title>
     <style type="text/css">
-        canvas {
+        .backer {
             display: block;
-            margin: 20px auto;
-            border: 1px solid #666;
-            height: 400px;
+            margin: 50px auto 0;
+            border: 1px solid black;
+            border-radius: 20px;
+            position: relative;
             width: 500px;
+            height: 500px;
+        }
+
+        #canvas {
+            position: absolute;
+            clip-path: circle(250px at center);
         }
     </style>
     <!--	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>-->
 </head>
 <body>
-<canvas id="canvas" height="400" width="500">Get a better browser!</canvas>
-	<script src="/bundle.js"></script>
+<div class="backer">
+    <canvas id="canvas"></canvas>
+</div>
+<script src="/bundle.js"></script>
 <!--<script src="./src/physics.js"></script>-->
 </body>
 </html>
