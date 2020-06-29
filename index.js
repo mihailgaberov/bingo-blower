@@ -20,16 +20,25 @@ export default class App {
       engine: engine,
       options: {
         wireframes: false,
-        width: 500,
-        height: 500,
+        width: 550,
+        height: 550,
         background: 'transparent'
       }
     })
 
     const balls = []
     const ballImagePaths = [
+      'static/images/1.png',
       'static/images/7.png',
-      'static/images/7.png',
+      'static/images/13.png',
+      'static/images/17.png',
+      'static/images/24.png',
+      'static/images/33.png',
+      'static/images/44.png',
+      'static/images/50.png',
+      'static/images/58.png',
+      'static/images/66.png',
+      'static/images/75.png',
     ]
 
     const createBall = () => {
@@ -40,7 +49,7 @@ export default class App {
           restitution: 1,
           render: {
             sprite: {
-              texture: ballImagePaths[Math.round(Math.random() * 2)]
+              texture: ballImagePaths[Math.round(Math.random() * (ballImagePaths.length - 1))]
             }
           }
         })
@@ -89,8 +98,8 @@ export default class App {
       return body
     }
 
-    const sW = 500
-    const sH = 500
+    const sW = 550
+    const sH = 550
     const m = Math.min(sW, sH)
     const rat = 1 / 4.5 * 2
     const r = m * rat
