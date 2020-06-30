@@ -8,7 +8,8 @@
     "start:dev0": "webpack-dev-server --host 0.0.0.0",
     "test": "ava test",
     "lint": "standard",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [
     "bingo",
