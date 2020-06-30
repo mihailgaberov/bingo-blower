@@ -11,7 +11,7 @@ body {
   background: url(static/images/blower.png);
   background-repeat: no-repeat;
   background-size: 140%;
-  background-position: -252px -117px;
+  background-position: -252px -113px;
   transform: translateY(-50%) translateX(-50%);
 }
 #canvas-wrapper:after {
