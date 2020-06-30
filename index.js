@@ -127,18 +127,18 @@ export default class App {
     const onRenderTick = () => {
       balls.forEach(ball => {
         if (ball.position.y >= render.canvas.height - 100) {
-          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: 0.01, y: -0.01 })
+          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: 0.003, y: -0.003 })
         }
         if (ball.position.y < 120) {
-          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: -0.01, y: 0.01 })
+          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: -0.003, y: 0.003 })
         }
 
         if (ball.position.x < 80) {
-          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: 0.01, y: -0.01 })
+          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: 0.003, y: -0.003 })
         }
 
         if (ball.position.x > render.canvas.width - 80) {
-          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: -0.01, y: 0.01 })
+          Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: -0.003, y: 0.003 })
         }
       })
     }
@@ -182,14 +182,15 @@ export default class App {
       addRect({
         x: cx2,
         y: cy2,
-        w: 10 / 1000 * m,
-        h: 300 / 1000 * m,
+        w: 100 / 1000 * m,
+        h: 3000 / 1000 * m,
         options: {
           angle: angle2,
           isStatic: true,
           density: 1,
           render: {
-            fillStyle: 'red',
+            fillStyle: 'transparent',
+            strokeStyle: 'white',
             lineWidth: 0
           }
         }
